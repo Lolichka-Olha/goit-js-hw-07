@@ -33,10 +33,27 @@ function onGalleryImageClick(event) {
   const instance = basicLightbox.create(
     `<img src="${event.target.dataset.source}">`
   );
+
   if (!isGalleryImage) {
     return;
   }
 
   instance.show();
   console.log(event.target.dataset.source);
+
+  window.addEventListener("keydown", onEscPress);
+
+  function onEscPress(event) {
+    if (event.code === "Escape") {
+      instance.close();
+      window.removeEventListener("keydown", onEscPress);
+    }
+  }
+
+  // window.addEventListener("keydown", (e) => {
+  //   if (e.key === "Escape") {
+  //     instance.close();
+  //     window.removeEventListener("keydown", e);
+  //   }
+  // });
 }
